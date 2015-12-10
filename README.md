@@ -33,6 +33,7 @@ General format: `docker run --name <container-name> -e MYSQL_ROOT_PASSWORD=<pass
 `docker run --name some-app --link some-mysql:mysql -d application-that-uses-mysql`
 
 # TODO
+- Extend instructions for Ubuntu and Windows
 - Import `sample.sql` into `mysql-container`
 - Create a docker image and push it to a DockerHub.
 
