@@ -37,9 +37,13 @@ and create a docker daemon as a VirtualBox VM with name `default`.
 
  `docker run --name some-app --link some-mysql:mysql -d application-that-uses-mysql`
 
+10. Create `catalog` database in the `mysql-container`. Refer to step 6 or 7 to access container's mysql.
+
+11. Import `sample.sql`: `docker exec -i mysql-container mysql -uroot -proot products < sample.sql`
+
 # TODO
 - Extend instructions for Ubuntu and Windows
-- Import `sample.sql` into `mysql-container`
+- Check if steps 10-11 can be automated with `Dockerfile` or `docker-composer.yml`
 - Create a docker image and push it to a DockerHub.
 
 _Notes:_ OFFICIAL REPOSITORY is Debian based
