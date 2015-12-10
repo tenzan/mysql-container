@@ -39,7 +39,7 @@ and create a docker daemon as a VirtualBox VM with name `default`.
 
 10. Create `catalog` database in the `mysql-container`. Refer to step 6 or 7 to access container's mysql.
 
-11. Import `sample.sql`: `docker exec -i mysql-container mysql -uroot -proot products < sample.sql`
+11. Import `sample.sql`: `docker exec -i mysql-container mysql -uroot -proot catalog < sample.sql`
 
 # TODO
 - Extend instructions for Ubuntu and Windows
