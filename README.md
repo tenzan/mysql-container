@@ -42,6 +42,6 @@ and create a docker daemon as a VirtualBox VM with name `default`.
 - Import `sample.sql` into `mysql-container`
 - Create a docker image and push it to a DockerHub.
 
-# OFFICIAL REPOSITORY is Debian based
-# Dockerfile: https://goo.gl/1sWRXV
-https://hub.docker.com/_/mysql/
+_Notes:_ OFFICIAL REPOSITORY is Debian based
+ - Dockerfile: https://goo.gl/1sWRXV
+ - https://hub.docker.com/_/mysql/
