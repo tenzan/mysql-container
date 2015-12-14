@@ -2,7 +2,7 @@
 
 1. Install docker for your OS.
 
-2. git pull <this-repo>
+2. `git clone https://github.com/tenzan/mysql-docker && cd mysql-docker`
 
 3. Build a repository
 `docker build -t mysql-repo`
@@ -31,7 +31,7 @@ where `tenzan` is my user name in the `DockerHub` and `20151214` is a tag.
 # Pulling from the DockerHub
 
 12. Make sure you don't have same image you're going to pull from the DockerHub, as it won't pull identical images
-You can check with `docker images`. If there's, you need to remove it by `docker rm <image-id>` prior to pulling.
+You can check with `docker images`. If there's, you need to remove it by `docker rmi <image-id>` prior to pulling.
 
 13. `docker pull tenzan/mysql:20151214`
 
@@ -40,6 +40,6 @@ You can check with `docker images`. If there's, you need to remove it by `docker
 
 15. Repeat steps 6-7 to access the database
 
-_Notes:_ OFFICIAL REPOSITORY (based on Debian)
+# OFFICIAL REPOSITORY (based on Debian)
  - Dockerfile: https://goo.gl/1sWRXV
  - https://hub.docker.com/_/mysql/
