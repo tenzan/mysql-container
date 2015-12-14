@@ -33,12 +33,17 @@ where `tenzan` is my user name in the `DockerHub` and `20151214` is a tag.
 12. Make sure you don't have same image you're going to pull from the DockerHub, as it won't pull identical images
 You can check with `docker images`. If there's, you need to remove it by `docker rmi <image-id>` prior to pulling.
 
-13. `docker pull tenzan/mysql:20151214`
-
-14. Run `mysql-cont` on the basis of `tenzan/mysql:20151214`
+13. Pull and run container
 `docker run --name mysql-cont -e MYSQL_ROOT_PASSWORD=root -d tenzan/mysql:20151214`
 
-15. Repeat steps 6-7 to access the database
+14. Create network with name `mysql-db`
+`docker network create mysql-db`
+
+15. Connect network `mysql-db` with container `mysql-cont`
+`docker network connect mysql-db mysql-cont`
+
+16. Login to a mysql shell
+`docker run -it --net=mysql-db --rm tenzan/mysql:20151214 sh -c 'exec mysql -hmysql-cont -uroot -proot'`
 
 # OFFICIAL REPOSITORY (based on Debian)
  - Dockerfile: https://goo.gl/1sWRXV
