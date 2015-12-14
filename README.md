@@ -38,6 +38,8 @@ You can check with `docker images`. If there's, you need to remove it by `docker
 14. Run `mysql-cont` on the basis of `tenzan/mysql:20151214`
 `docker run --name mysql-cont -e MYSQL_ROOT_PASSWORD=root -d tenzan/mysql:20151214`
 
+15. Repeat steps 6-7 to access the database
+
 _Notes:_ OFFICIAL REPOSITORY (based on Debian)
  - Dockerfile: https://goo.gl/1sWRXV
  - https://hub.docker.com/_/mysql/
