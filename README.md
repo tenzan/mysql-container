@@ -1,51 +1,43 @@
 # Creating docker container for sample.sql in MySQL
 
-## Install docker
+1. Install docker for your OS.
 
-Instructions for Mac OS X
+2. git pull <this-repo>
 
-1. Install docker
+3. Build a repository
+`docker build -t mysql-repo`
 
- `brew install Caskroom/cask/dockertoolbox`
+4. Run `mysql-cont` by specifying a `root` password.
+`docker run --name mysql-cont -e MYSQL_ROOT_PASSWORD=root -d mysql-repo`
 
- Alternative install https://docs.docker.com/v1.8/installation/mac/
+5. Check if container `mysql-repo` is running with `docker ps`
 
-2. You will need to start a docker daemon.
- - From Applications run `Docker Quickstart Terminal`, which will open a terminal
-and create a docker daemon as a VirtualBox VM with name `default`.
- - This can be checked by `VBoxManage list runningvms` or `docker-machine ls`.
+6. Login into the `mysql-cont`: `docker exec -it mysql-cont bash`
+ - This will mean you logged in another linux environment
 
-3. Check if install was successful by running `docker run hello-world`
+7. Now you can login mysql by `mysql -uroot --proot` and confirm the existence of `catalog` database (as per `sample.sql`)
 
-4. Run `docker run --name mysql-container -e MYSQL_ROOT_PASSWORD=root -d mysql:5.7.9`
+# Pushing to the DockerHub
 
- General format:
- `docker run --name <container-name> -e MYSQL_ROOT_PASSWORD=<password-for-root> -d mysql:<version>`
+8. Run `docker images` to check `IMAGE ID` for `mysql-repo`, which is `9a53308ac9dd` in my case.
 
-5. Check if container `mysql-container` is running with `docker ps`
+9. `docker tag 9a53308ac9dd tenzan/mysql:20151214`
+where `tenzan` is my user name in the `DockerHub` and `20151214` is a tag.
 
-6. Login into the `mysql-container`: `docker exec -it mysql-container bash`
- - This will mean you logged in another linux environment, so you can login mysql by `mysql -uroot --proot`
+10. Login into the DockerHub `docker login`
 
-7. Connect to MySQL from the MySQL command line client
+11. Push to the DockerHub `docker push tenzan/mysql:20151214`
 
- `docker run -it --link mysql-container:mysql --rm mysql sh -c 'exec mysql -h"$MYSQL_PORT_3306_TCP_ADDR" -P"$MYSQL_PORT_3306_TCP_PORT" -uroot -p"$MYSQL_ENV_MYSQL_ROOT_PASSWORD"'`
+# Pulling from the DockerHub
 
-8. Logs: `docker logs mysql-container`
+12. Make sure you don't have same image you're going to pull from the DockerHub, as it won't pull identical images
+You can check with `docker images`. If there's, you need to remove it by `docker rm <image-id>` prior to pulling.
 
-9. Connect to MySQL from an application in another Docker container (Work in Progress)
+13. `docker pull tenzan/mysql:20151214`
 
- `docker run --name some-app --link some-mysql:mysql -d application-that-uses-mysql`
+14. Run `mysql-cont` on the basis of `tenzan/mysql:20151214`
+`docker run --name mysql-cont -e MYSQL_ROOT_PASSWORD=root -d tenzan/mysql:20151214`
 
-10. Create `catalog` database in the `mysql-container`. Refer to step 6 or 7 to access container's mysql.
-
-11. Import `sample.sql`: `docker exec -i mysql-container mysql -uroot -proot catalog < sample.sql`
-
-# TODO
-- Extend instructions for Ubuntu and Windows
-- Check if steps 10-11 can be automated with `Dockerfile` or `docker-composer.yml`
-- Create a docker image and push it to a DockerHub.
-
-_Notes:_ OFFICIAL REPOSITORY is Debian based
+_Notes:_ OFFICIAL REPOSITORY (based on Debian)
  - Dockerfile: https://goo.gl/1sWRXV
  - https://hub.docker.com/_/mysql/
